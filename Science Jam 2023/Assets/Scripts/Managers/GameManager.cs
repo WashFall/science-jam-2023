@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Threading.Tasks;
 
 [RequireComponent(typeof(InputManager))]
 public class GameManager : MonoBehaviour
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
     public Vector3 leftImagePosition, rightImagePosition;
     
     private GameObject[] currentImages = new GameObject[2];
+    public int right, wrong;
 
     private void Awake()
     {
@@ -80,7 +82,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void DisplayImagePair()
+    public async void DisplayImagePair()
     {
         if (currentImages[0] is not null)
         {
@@ -95,13 +97,56 @@ public class GameManager : MonoBehaviour
         // currentImages[1].transform.position = new Vector3(rightImagePosition.x, 0, rightImagePosition.z);
         currentImages[0].transform.position = leftImagePosition;
         currentImages[1].transform.position = rightImagePosition;
-        currentImages[1].GetComponent<Floater>().offset = 0.5f;
 
+        // foreach (var image in currentImages)
+        // {
+        //     image.SetActive(true);
+        // }
+        currentImages[0].SetActive(true);
+        await Buffer(0.8f);
+        currentImages[1].SetActive(true);
+    }
+
+    public async Task Buffer(float buffer)
+    {
+        float endTime = Time.time + buffer;
+        while (Time.time < endTime)
+        {
+            await Task.Yield();
+        }
+    }
+
+    public async void SubmitAnswer(GameObject chosenImage, float leftOrRight)
+    {
         foreach (var image in currentImages)
         {
-            image.transform.rotation = Quaternion.LookRotation(Camera.main.transform.position * -1);
-            
-            image.SetActive(true);
+            if (image != chosenImage)
+            {
+                image.GetComponent<Floater>().canFloat = false;
+                image.GetComponent<Rigidbody>().useGravity = true;
+            }
+        }
+
+        if (chosenImage.GetComponent<ImageData>().isReal)
+            right++;
+        else
+            wrong++;
+
+        chosenImage.GetComponent<Floater>().canFloat = false;
+        chosenImage.GetComponent<Rigidbody>().useGravity = true;
+        float force = 10;
+        if (leftOrRight < 0) force = -10;
+        else if (leftOrRight > 0) force = 10;
+        chosenImage.GetComponent<Rigidbody>().AddForce(force, 0, 0, ForceMode.Impulse);
+
+        await Buffer(1.3f);
+        if (right + wrong == 10)
+        {
+            UpdateGameState(GameState.result);
+        }
+        else
+        {
+            DisplayImagePair();
         }
     }
 }

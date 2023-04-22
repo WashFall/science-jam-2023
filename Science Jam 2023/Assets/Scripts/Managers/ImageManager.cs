@@ -32,10 +32,12 @@ public class ImageManager : MonoBehaviour
 
     public GameObject[] LoadImagePair()
     {
+        GameObject[] imagePair = new GameObject[2];
+        
+        if (imageObjects.Count < 2) return imagePair;
         int randomType = Random.Range(0, imageTypes.Count);
         string type = imageTypes[randomType];
         
-        GameObject[] imagePair = new GameObject[2];
         int index = 0;
         
         foreach (var imageObject in imageObjects)
@@ -45,6 +47,19 @@ public class ImageManager : MonoBehaviour
                 imagePair[index] = imageObject;
                 index++;
             }
+        }
+
+        imageObjects.Remove(imagePair[0]);
+        imageObjects.Remove(imagePair[1]);
+        imageTypes.Remove(type);
+
+        int randomChanceForPlacement = Random.Range(0, 2);
+        if (randomChanceForPlacement == 1)
+        {
+            GameObject[] tempImagePair = new GameObject[2];
+            tempImagePair[0] = imagePair[1];
+            tempImagePair[1] = imagePair[0];
+            imagePair = tempImagePair;
         }
 
         return imagePair;
