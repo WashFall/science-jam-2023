@@ -468,9 +468,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   imagePrefab: {fileID: 4895643852147528575, guid: 0972ba4a089b6214daf8b6c801dd040b, type: 3}
   imageObjects: []
-  images:
-  - {fileID: 2800000, guid: 42b74b89e7418ab46b0153ea1c001f0b, type: 3}
-  - {fileID: 2800000, guid: b86398826ee39814db56723921cb42d4, type: 3}
+  images: []
+  imageTypes: []
 --- !u!4 &1426521162
 Transform:
   m_ObjectHideFlags: 0
@@ -855,6 +854,34 @@ PrefabInstance:
       propertyPath: menuManager
       value: 
       objectReference: {fileID: 531065117}
+    - target: {fileID: 1744880919048687704, guid: 7b6843c30d1cc744cb467b8517a86221, type: 3}
+      propertyPath: imageManager
+      value: 
+      objectReference: {fileID: 1426521161}
+    - target: {fileID: 1744880919048687704, guid: 7b6843c30d1cc744cb467b8517a86221, type: 3}
+      propertyPath: leftImagePosition.x
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1744880919048687704, guid: 7b6843c30d1cc744cb467b8517a86221, type: 3}
+      propertyPath: leftImagePosition.y
+      value: 1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1744880919048687704, guid: 7b6843c30d1cc744cb467b8517a86221, type: 3}
+      propertyPath: leftImagePosition.z
+      value: -3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1744880919048687704, guid: 7b6843c30d1cc744cb467b8517a86221, type: 3}
+      propertyPath: rightImagePosition.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1744880919048687704, guid: 7b6843c30d1cc744cb467b8517a86221, type: 3}
+      propertyPath: rightImagePosition.y
+      value: 1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1744880919048687704, guid: 7b6843c30d1cc744cb467b8517a86221, type: 3}
+      propertyPath: rightImagePosition.z
+      value: -3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2799118658259442379, guid: 7b6843c30d1cc744cb467b8517a86221, type: 3}
       propertyPath: m_RootOrder
       value: 2

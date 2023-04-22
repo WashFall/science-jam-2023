@@ -9,10 +9,16 @@ public class GameManager : MonoBehaviour
     
     [HideInInspector]
     public InputManager inputManager;
+    [Header("Managers")]
     public MenuManager menuManager;
     public ImageManager imageManager;
 
+    [Header("Variables")]
     public GameState gameState;
+
+    public Vector3 leftImagePosition, rightImagePosition;
+    
+    private GameObject[] currentImages = new GameObject[2];
 
     private void Awake()
     {
@@ -31,6 +37,7 @@ public class GameManager : MonoBehaviour
         inputManager.keyPressed += HandleInput;
 
         UpdateGameState(GameState.playing);
+        DisplayImagePair();
     }
 
     public void UpdateGameState(GameState newState)
@@ -68,6 +75,24 @@ public class GameManager : MonoBehaviour
                     Debug.LogError(e);
                 }
                 break;
+        }
+    }
+
+    public void DisplayImagePair()
+    {
+        currentImages = imageManager.LoadImagePair();
+
+        // currentImages[0].transform.position = new Vector3(leftImagePosition.x, 0, leftImagePosition.z);
+        // currentImages[1].transform.position = new Vector3(rightImagePosition.x, 0, rightImagePosition.z);
+        currentImages[0].transform.position = leftImagePosition;
+        currentImages[1].transform.position = rightImagePosition;
+        currentImages[1].GetComponent<Floater>().offset = 0.5f;
+
+        foreach (var image in currentImages)
+        {
+            image.transform.rotation = Quaternion.LookRotation(Camera.main.transform.position * -1);
+            
+            image.SetActive(true);
         }
     }
 }
