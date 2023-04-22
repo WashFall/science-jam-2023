@@ -17,26 +17,35 @@ public class Move3D : MonoBehaviour
     }
 
     private float counter = 0;
+    public bool canMove = true;
 
     void OnMouseDrag()
     {
-        floater.canFloat = false;
-        Vector3 ScreenPosition =
-            new Vector3(Input.mousePosition.x, Input.mousePosition.y, CameraZDistance); //z axis added to screen point 
-        Vector3 NewWorldPosition =
-            mainCamera.ScreenToWorldPoint(ScreenPosition); //Screen point converted to world point
+        if(canMove)
+        {
+            floater.canFloat = false;
+            Vector3 ScreenPosition =
+                new Vector3(Input.mousePosition.x, Input.mousePosition.y,
+                    CameraZDistance); //z axis added to screen point 
+            Vector3 NewWorldPosition =
+                mainCamera.ScreenToWorldPoint(ScreenPosition); //Screen point converted to world point
 
-        transform.position = NewWorldPosition;
-        
+            transform.position = NewWorldPosition;
+        }
     }
 
     private void OnMouseUp()
     {
-        if (transform.position.x <= -6 || transform.position.x >= 6)
+        if(canMove)
         {
-            GameManager.Instance.SubmitAnswer(gameObject, transform.position.x);
-            return;
+            if (transform.position.x <= -6 || transform.position.x >= 6)
+            {
+                GameManager.Instance.SubmitAnswer(gameObject, transform.position.x);
+            }
+            else
+            {
+                floater.canFloat = true;
+            }
         }
-        floater.canFloat = true;
     }
 }

@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 
 [RequireComponent(typeof(InputManager))]
 public class GameManager : MonoBehaviour
@@ -21,6 +23,7 @@ public class GameManager : MonoBehaviour
     
     private GameObject[] currentImages = new GameObject[2];
     public int right, wrong;
+    public List<string> wrongTypes = new();
 
     private void Awake()
     {
@@ -33,12 +36,15 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    private void Start()
+    private async void Start()
     {
         inputManager = GetComponent<InputManager>();
         inputManager.keyPressed += HandleInput;
 
         UpdateGameState(GameState.playing);
+
+        await Buffer(2);
+        DisplayImagePair();
     }
 
     public void UpdateGameState(GameState newState)
@@ -75,9 +81,6 @@ public class GameManager : MonoBehaviour
                 {
                     Debug.LogError(e);
                 }
-                break;
-            case KeyCode.Space:
-                DisplayImagePair();
                 break;
         }
     }
@@ -124,16 +127,21 @@ public class GameManager : MonoBehaviour
             {
                 image.GetComponent<Floater>().canFloat = false;
                 image.GetComponent<Rigidbody>().useGravity = true;
+                image.GetComponent<Move3D>().canMove = false;
             }
         }
 
         if (chosenImage.GetComponent<ImageData>().isReal)
             right++;
         else
+        {
+            wrongTypes.Add(chosenImage.GetComponent<ImageData>().type);
             wrong++;
+        }
 
         chosenImage.GetComponent<Floater>().canFloat = false;
         chosenImage.GetComponent<Rigidbody>().useGravity = true;
+        chosenImage.GetComponent<Move3D>().canMove = false;
         float force = 10;
         if (leftOrRight < 0) force = -10;
         else if (leftOrRight > 0) force = 10;
