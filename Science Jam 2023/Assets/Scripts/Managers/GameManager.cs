@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public InputManager inputManager;
     public MenuManager menuManager;
+    public ImageManager imageManager;
 
     public GameState gameState;
 
