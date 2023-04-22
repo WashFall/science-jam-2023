@@ -37,7 +37,6 @@ public class GameManager : MonoBehaviour
         inputManager.keyPressed += HandleInput;
 
         UpdateGameState(GameState.playing);
-        DisplayImagePair();
     }
 
     public void UpdateGameState(GameState newState)
@@ -74,6 +73,9 @@ public class GameManager : MonoBehaviour
                 {
                     Debug.LogError(e);
                 }
+                break;
+            case KeyCode.Space:
+                DisplayImagePair();
                 break;
         }
     }

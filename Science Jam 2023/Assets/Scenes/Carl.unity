@@ -466,7 +466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23c3d75c6869f6f4cb0317750e57db89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  imagePrefab: {fileID: 4895643852147528575, guid: 0972ba4a089b6214daf8b6c801dd040b, type: 3}
+  imagePrefab: {fileID: 605777853850306436, guid: 611faed8622e6a24cb79d8ff076e3527, type: 3}
   imageObjects: []
   images: []
   imageTypes: []
@@ -849,6 +849,10 @@ PrefabInstance:
     - target: {fileID: 1417186975287880100, guid: 7b6843c30d1cc744cb467b8517a86221, type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 1417186975287880100, guid: 7b6843c30d1cc744cb467b8517a86221, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1744880919048687704, guid: 7b6843c30d1cc744cb467b8517a86221, type: 3}
       propertyPath: menuManager

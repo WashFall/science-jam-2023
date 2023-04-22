@@ -12,5 +12,10 @@ public class InputManager : MonoBehaviour
         {
             keyPressed(KeyCode.Escape);
         }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            keyPressed(KeyCode.Space);
+        }
     }
 }
