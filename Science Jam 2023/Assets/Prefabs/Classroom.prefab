@@ -1022,6 +1022,7 @@ GameObject:
   - component: {fileID: 8283734554278124259}
   - component: {fileID: 183212522144769969}
   - component: {fileID: 549483203743515097}
+  - component: {fileID: 1781783244262449651}
   m_Layer: 0
   m_Name: Classroom Room
   m_TagString: Untagged
@@ -1079,7 +1080,7 @@ MeshRenderer:
   - {fileID: 2100000, guid: 98d964f749679ca4d8d36655c3643602, type: 2}
   - {fileID: 2100000, guid: 98d964f749679ca4d8d36655c3643602, type: 2}
   - {fileID: 2100000, guid: 9e359e4040f3193439c16f3ba250c299, type: 2}
-  - {fileID: 2100000, guid: 9e359e4040f3193439c16f3ba250c299, type: 2}
+  - {fileID: 2100000, guid: 9b351f5e4ffc0834db32a7f158aca6fe, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1101,6 +1102,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1781783244262449651
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4052979025181800289}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3390659240524817956, guid: 6f9606de00a9b214a98b9741f1a8b253, type: 3}
 --- !u!1 &4319310728444263229
 GameObject:
   m_ObjectHideFlags: 0
