@@ -66,7 +66,6 @@ public class GameManager : MonoBehaviour
                 {
                     Debug.LogError(e);
                 }
-                print(Time.timeScale);
                 break;
         }
     }
