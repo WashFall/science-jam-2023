@@ -33,7 +33,6 @@ public class ImageManager : MonoBehaviour
     public GameObject[] LoadImagePair()
     {
         int randomType = Random.Range(0, imageTypes.Count);
-        Debug.Log(randomType);
         string type = imageTypes[randomType];
         
         GameObject[] imagePair = new GameObject[2];

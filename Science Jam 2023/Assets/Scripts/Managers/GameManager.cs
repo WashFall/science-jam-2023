@@ -82,6 +82,13 @@ public class GameManager : MonoBehaviour
 
     public void DisplayImagePair()
     {
+        if (currentImages[0] is not null)
+        {
+            foreach (var image in currentImages)
+            {
+                image.gameObject.SetActive(false);
+            }
+        }
         currentImages = imageManager.LoadImagePair();
 
         // currentImages[0].transform.position = new Vector3(leftImagePosition.x, 0, leftImagePosition.z);
