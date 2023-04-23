@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
     public int right, wrong;
     public List<string> wrongTypes = new();
 
+    public AudioSource swooshSource, freshSource;
+
     private void Awake()
     {
         if (_instance == null)
@@ -113,6 +115,7 @@ public class GameManager : MonoBehaviour
         //     image.SetActive(true);
         // }
         currentImages[0].SetActive(true);
+        freshSource.Play();
         await Buffer(0.8f);
         currentImages[1].SetActive(true);
     }
@@ -128,6 +131,8 @@ public class GameManager : MonoBehaviour
 
     public async void SubmitAnswer(GameObject chosenImage, float leftOrRight)
     {
+        swooshSource.Play();
+
         foreach (var image in currentImages)
         {
             if (image != chosenImage)
@@ -153,7 +158,6 @@ public class GameManager : MonoBehaviour
         if (leftOrRight < 0) force = -4;
         else if (leftOrRight > 0) force = 4;
         chosenImage.GetComponent<Rigidbody>().AddForce(force, 0, 0, ForceMode.Impulse);
-
         await Buffer(1.3f);
         if (right + wrong == 10)
         {
@@ -171,7 +175,7 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 }
 
