@@ -22,8 +22,8 @@ public class Floater : MonoBehaviour
         if (canMove)
         {
             transform.position = Vector3.Lerp(transform.position,
-                new Vector3(transform.position.x, 1.7f, transform.position.z), 5 * Time.deltaTime);
-            if (transform.position.y <= (1.7f + 0.1f))
+                new Vector3(transform.position.x, 1f, transform.position.z), 2 * Time.deltaTime);
+            if (transform.position.y <= (1f + 0.02f))
             {
                 canMove = false;
                 canFloat = true;

@@ -21,7 +21,7 @@ public class Move3D : MonoBehaviour
 
     void OnMouseDrag()
     {
-        if(canMove)
+        if(canMove && !floater.canMove)
         {
             floater.canFloat = false;
             Vector3 ScreenPosition =
@@ -36,9 +36,9 @@ public class Move3D : MonoBehaviour
 
     private void OnMouseUp()
     {
-        if(canMove)
+        if(canMove && !floater.canMove)
         {
-            if (transform.position.x <= -6 || transform.position.x >= 6)
+            if (transform.position.x <= -0.65f || transform.position.x >= 0.65f)
             {
                 GameManager.Instance.SubmitAnswer(gameObject, transform.position.x);
             }

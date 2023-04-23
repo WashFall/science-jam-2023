@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
-using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(InputManager))]
 public class GameManager : MonoBehaviour
@@ -32,17 +32,19 @@ public class GameManager : MonoBehaviour
             _instance = this;
         }
         else Destroy(gameObject);
-        
-        DontDestroyOnLoad(gameObject);
     }
 
-    private async void Start()
+    private void Start()
     {
         inputManager = GetComponent<InputManager>();
         inputManager.keyPressed += HandleInput;
+        UpdateGameState(GameState.pauses);
+    }
 
+    public async void StartGame()
+    {
+        menuManager.ToggleStartMenu();
         UpdateGameState(GameState.playing);
-
         await Buffer(2);
         DisplayImagePair();
     }
@@ -64,6 +66,11 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 0;
                 break;
             case GameState.result:
+                Time.timeScale = 0;
+                string wrongType = "perfect";
+                if(wrongTypes.Count > 0)
+                    wrongType = wrongTypes[0];
+                menuManager.ToggleResultMenu(right, wrongType);
                 break;
         }
     }
@@ -143,19 +150,28 @@ public class GameManager : MonoBehaviour
         chosenImage.GetComponent<Rigidbody>().useGravity = true;
         chosenImage.GetComponent<Move3D>().canMove = false;
         float force = 10;
-        if (leftOrRight < 0) force = -10;
-        else if (leftOrRight > 0) force = 10;
+        if (leftOrRight < 0) force = -4;
+        else if (leftOrRight > 0) force = 4;
         chosenImage.GetComponent<Rigidbody>().AddForce(force, 0, 0, ForceMode.Impulse);
 
         await Buffer(1.3f);
         if (right + wrong == 10)
         {
+            Destroy(currentImages[0]);
+            Destroy(currentImages[1]);
             UpdateGameState(GameState.result);
         }
         else
         {
+            Destroy(currentImages[0]);
+            Destroy(currentImages[1]);
             DisplayImagePair();
         }
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(0);
     }
 }
 
